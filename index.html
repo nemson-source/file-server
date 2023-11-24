@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    h1 {
+      padding: 20px;
+    }
+
+    h2 {
+      color: #4caf50;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    img, iframe {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    #upload-message {
+      display: none;
+      color: #4caf50;
+      font-weight: bold;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload a File</h1>
+  <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showUploadMessage()">
+    <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif, .pdf">
+    <button type="submit">Upload</button>
+  </form>
+  <div id="upload-message">Uploading...</div>
+
+  <script>
+    function showUploadMessage() {
+      document.getElementById("upload-message").style.display = "block";
+    }
+  </script>
+</body>
+</html>
