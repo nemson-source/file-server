@@ -34,6 +34,19 @@
       color: #4caf50;
       font-weight: bold;
     }
+
+    #progress-bar {
+      width: 100%;
+      background-color: #ddd;
+      height: 20px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    #progress-fill {
+      height: 100%;
+      background-color: #4caf50;
+    }
     form {
       max-width: 600px;
       margin: 0 auto;
@@ -60,15 +73,47 @@
 </head>
 <body>
   <h1>Upload a File</h1>
-  <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showUploadMessage()">
+  <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showUploadMessage()">
     <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif, .pdf">
     <button type="submit">Upload</button>
   </form>
   <div id="upload-message">Uploading...</div>
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
+  </div>
 
   <script>
     function showUploadMessage() {
       document.getElementById("upload-message").style.display = "block";
+      document.getElementById("progress-bar").style.display = "block";
+      const form = document.getElementById("upload-form");
+      const formData = new FormData(form);
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/upload");
+      xhr.upload.onprogress = function (event) {
+        if (event.lengthComputable) {
+          const progress = (event.loaded / event.total) * 100;
+          document.getElementById("progress-fill").style.width = progress + "%";
+        }
+      };
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // File uploaded successfully
+            console.log(xhr.responseText);
+          } else {
+            // File upload failed
+            console.error(xhr.responseText);
+          }
+        }
+      };
+
+      xhr.send(formData);
+
+      // Prevent the default form submission
+      return false;
     }
   </script>
 </body>
