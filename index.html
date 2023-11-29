@@ -101,18 +101,14 @@
       xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status === 200) {
-            // File uploaded successfully
             console.log(xhr.responseText);
           } else {
-            // File upload failed
             console.error(xhr.responseText);
           }
         }
       };
 
       xhr.send(formData);
-
-      // Prevent the default form submission
       return false;
     }
   </script>
