@@ -23,7 +23,7 @@ const fileFilter = (req, file, cb) => {
   if (allowedFileTypes.includes(fileExtension)) {
     cb(null, true);
   } else {
-    const errorMessage = 'Invalid file type. Only images (jpg, jpeg, png, gif) and PDFs are allowed.';
+    const errorMessage = 'Type de fichier invalide. Seules les images (jpg, jpeg, png) et PDF sont autorisées.';
     console.error(`[${new Date().toISOString()}] ${errorMessage}`);
     cb(new Error(errorMessage));
   }
