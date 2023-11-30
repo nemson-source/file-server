@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>File Upload</title>
+<meta charset="utf-8"/>
+  <title>Transfert de fichier</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -72,12 +73,12 @@
   </style>
 </head>
 <body>
-  <h1>Upload a File</h1>
+  <h1>Transférer un fichier</h1>
   <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showUploadMessage()">
     <input type="file" name="file" accept=".jpg, .jpeg, .png, .pdf">
-    <button type="submit">Upload</button>
+    <button type="submit">Transférer un fichier</button>
   </form>
-  <div id="upload-message">Uploading...</div>
+  <div id="upload-message">Transfert en cours...</div>
   <div id="progress-bar">
     <div id="progress-fill"></div>
   </div>
