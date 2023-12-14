@@ -54,7 +54,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
         <h2>Fichier téléchargé avec succès!</h2>
         <p>File Type: ${req.file.mimetype}</p>
         <p>File Name: ${req.file.originalname}</p>
-        <iframe src="${filePath}" style="width: 100%; height: 890px;" frameborder="0"></iframe>
+        <iframe src="${filePath}" style="width: 100%; height: 100%;" frameborder="0"></iframe>
       `);
     } else {
       console.log(`[${new Date().toISOString()}] Type de fichier non pris en charge. Impossible d'afficher.`);
