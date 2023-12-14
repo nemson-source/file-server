@@ -43,7 +43,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     if (req.file.mimetype.startsWith('image')) {
       console.log(`[${new Date().toISOString()}] Image file uploaded successfully`);
       res.send(`
-        <h2>File uploaded successfully!</h2>
+        <h2>Fichier téléchargé avec succès!</h2>
         <p>File Type: ${req.file.mimetype}</p>
         <p>File Name: ${req.file.originalname}</p>
         <img src="${filePath}" alt="Uploaded Image">
@@ -51,23 +51,23 @@ app.post('/upload', upload.single('file'), (req, res) => {
     } else if (req.file.mimetype === 'application/pdf') {
       console.log(`[${new Date().toISOString()}] PDF file uploaded successfully`);
       res.send(`
-        <h2>File uploaded successfully!</h2>
+        <h2>Fichier téléchargé avec succès!</h2>
         <p>File Type: ${req.file.mimetype}</p>
         <p>File Name: ${req.file.originalname}</p>
-        <iframe src="${filePath}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+        <iframe src="${filePath}" style="width: 100%; height: 890px;" frameborder="0"></iframe>
       `);
     } else {
-      console.log(`[${new Date().toISOString()}] Unsupported file type. Unable to display.`);
+      console.log(`[${new Date().toISOString()}] Type de fichier non pris en charge. Impossible d'afficher.`);
       res.send(`
-        <h2>File uploaded successfully!</h2>
+        <h2>Fichier téléchargé avec succès!</h2>
         <p>File Type: ${req.file.mimetype}</p>
         <p>File Name: ${req.file.originalname}</p>
-        <p>Unsupported file type. Unable to display.</p>
+        <p>Type de fichier non pris en charge. Impossible d'afficher.</p>
       `);
     }
   } else {
     console.log(`[${new Date().toISOString()}] File upload failed`);
-    res.status(400).send('File upload failed.');
+    res.status(400).send('Échec du téléchargement du fichier.');
   }
 });
 
