@@ -1,6 +1,18 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs')
+
+function createFolder(folderName) {
+  if (!fs.existsSync(folderName)) {
+    fs.mkdirSync(folderName);
+    console.log(`Folder "${folderName}" created successfully.`);
+  } else {
+    console.log(`Folder "${folderName}" already exists.`);
+  }
+}
+const folderName = 'uploads';
+createFolder(folderName);
 
 const app = express();
 const port = 3000;
@@ -44,24 +56,24 @@ app.post('/upload', upload.single('file'), (req, res) => {
       console.log(`[${new Date().toISOString()}] Image file uploaded successfully`);
       res.send(`
         <h2>Fichier téléchargé avec succès!</h2>
-        <p>File Type: ${req.file.mimetype}</p>
-        <p>File Name: ${req.file.originalname}</p>
+        <p>Type de Fichier: ${req.file.mimetype}</p>
+        <p>Nom de Fichier: ${req.file.originalname}</p>
         <img src="${filePath}" alt="Uploaded Image">
       `);
     } else if (req.file.mimetype === 'application/pdf') {
       console.log(`[${new Date().toISOString()}] PDF file uploaded successfully`);
       res.send(`
         <h2>Fichier téléchargé avec succès!</h2>
-        <p>File Type: ${req.file.mimetype}</p>
-        <p>File Name: ${req.file.originalname}</p>
-        <iframe src="${filePath}" style="width: 100%; height: 100%;" frameborder="0"></iframe>
+        <p>Type de Fichier: ${req.file.mimetype}</p>
+        <p>Nom de Fichier: ${req.file.originalname}</p>
+        <iframe src="${filePath}" style="width: 100%; height: 847px;" frameborder="0"></iframe>
       `);
     } else {
       console.log(`[${new Date().toISOString()}] Type de fichier non pris en charge. Impossible d'afficher.`);
       res.send(`
         <h2>Fichier téléchargé avec succès!</h2>
-        <p>File Type: ${req.file.mimetype}</p>
-        <p>File Name: ${req.file.originalname}</p>
+        <p>Type de Fichier: ${req.file.mimetype}</p>
+        <p>Nom de Fichier: ${req.file.originalname}</p>
         <p>Type de fichier non pris en charge. Impossible d'afficher.</p>
       `);
     }
