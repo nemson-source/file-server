@@ -40,4 +40,4 @@ The public/uploads folder is where the uploaded files are saved.
 
 ## License
 
-[MIT](LICENSE)
+[Apache-2.0 license](LICENSE)
