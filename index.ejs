@@ -110,6 +110,16 @@
     #file-list li {
       margin-bottom: 5px;
     }
+
+    .file-link {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .file-link a {
+      text-decoration: none;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -133,7 +143,15 @@
       <h2>Uploaded Files</h2>
       <ul>
         <% files.forEach(file => { %>
-          <li><%= file %></li>
+          <li>
+            <span class="file-link">
+              <a href="/uploads/<%= file %>" target="_blank" rel="noopener noreferrer">View</a>
+            </span>
+            <span class="file-link">
+              <a href="/download/<%= file %>" download>Download</a>
+            </span>
+            <%= file %>
+          </li>
         <% }); %>
       </ul>
     </section>
