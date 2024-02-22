@@ -1,54 +1,43 @@
-# File Upload Server
+# File Server
 
-This is a simple file upload server built with Node.js using Express and Multer. 
+This is a simple file server that allows uploading and downloading files.
 
 ## Features
 
-- Allows users to upload image files (JPG, JPEG, PNG) and PDF documents
-- Saves uploaded files to the `uploads` folder
-- Displays uploaded images and PDFs back to the user
-- Progress bar during file upload 
-- Only allows file extensions in the allowed list
+- Upload files via a web form 
+- View uploaded image and PDF files directly in the browser
+- Download uploaded files
+- List all uploaded files
 
 ## Usage
 
-### Install Dependencies
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Run `node index.js` to start the server
+4. Open `http://localhost:3000` in your browser
 
-```
-npm install
-```
+## Code Overview
 
-### Run Server
+The main dependencies are:
 
-```
-node index.js
-```
+- `express` - web framework 
+- `multer` - for handling file uploads
+- `ejs` - for rendering templates
 
-Server will run on port 3000.
+The index.js file:
 
-The `index.html` page allows users to upload files. Uploaded files are saved in the `uploads` folder.
+- Sets up the Express app and configures EJS as the template engine
+- Configures Multer for handling file uploads
+- Renders the main page with a list of uploaded files
+- Handles requests for downloading and uploading files
 
-Allowed file extensions:
+The templates/index.ejs file:
 
-- .jpg
-- .jpeg 
-- .png
-- .pdf
+- Displays the upload form and list of uploaded files
+- Shows uploaded images and PDFs directly in the page
 
-The server will reject any other file types.
+The public/uploads folder is where the uploaded files are saved.
 
-### File Display
+## License
 
-- **Images**: The image will be displayed back to the user after a successful upload 
-- **PDFs**: The PDF is embedded and displayed in the browser using an `<iframe>`
-- **Other Files**: A message states that the file was uploaded successfully but cannot be displayed
-
-## Implementation
-
-- Express is used to create the server
-- Multer handles file uploads and storage
-- File filter checks allowed file extensions
-- PDFs and images are displayed differently after upload
-- Basic styling and progress bar on client side
-
-Overall, this provides a simple working example of handling file uploads in a Node server.
+[MIT](LICENSE)
