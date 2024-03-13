@@ -41,6 +41,18 @@ createFolder(folderName);
 
 const app = express();
 const port = 3000;
+const password = 'password';
+
+// Middleware for password protection
+app.use((req, res, next) => {
+  const enteredPassword = req.query.password || '';
+  if (enteredPassword === password) {
+    console.log(`[${new Date().toISOString()}] Connection from ${req.ip}`);
+    next();
+  } else {
+    res.status(401).send('Unauthorized. Please enter the correct password.');
+  }
+});
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
