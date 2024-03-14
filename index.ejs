@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>File Server</title>
+  <title>File Transfer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -177,7 +177,7 @@
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status === 200) {
             console.log(xhr.responseText);
-            location.reload();
+            location.reload(); // Refresh the page after successful upload
           } else {
             console.error(xhr.responseText);
           }
