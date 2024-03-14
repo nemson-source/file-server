@@ -3,29 +3,6 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const ejs = require('ejs');
-const os = require('os');
-
-const getLocalIpAddress = () => {
-  const ifaces = os.networkInterfaces();
-  let ipAddress = '';
-  Object.keys(ifaces).forEach((ifname) => {
-    let alias = 0;
-    ifaces[ifname].forEach((iface) => {
-      if ('IPv4' !== iface.family || iface.internal !== false) {
-        return;
-      }
-      if (alias >= 1) {
-        console.log(ifname + ':' + alias, iface.address);
-      } else {
-        console.log(ifname, iface.address);
-        ipAddress = iface.address;
-      }
-      alias++;
-    });
-  });
-  return ipAddress;
-};
-console.log(`Local IP address: ${getLocalIpAddress()}`);
 
 function createFolder(folderName) {
   if (!fs.existsSync(folderName)) {
@@ -41,18 +18,6 @@ createFolder(folderName);
 
 const app = express();
 const port = 3000;
-const password = 'password';
-
-// Middleware for password protection
-app.use((req, res, next) => {
-  const enteredPassword = req.query.password || '';
-  if (enteredPassword === password) {
-    console.log(`[${new Date().toISOString()}] Connection from ${req.ip}`);
-    next();
-  } else {
-    res.status(401).send('Unauthorized. Please enter the correct password.');
-  }
-});
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -78,19 +43,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.get('/', (req, res) => {
   const files = fs.readdirSync(path.join(__dirname, 'uploads'));
   res.render('index', { files });
-});
-
-app.get('/download/:file', (req, res) => {
-  const file = req.params.file;
-  const filePath = path.join(__dirname, 'uploads', file);
-  if (fs.existsSync(filePath)) {
-    res.setHeader('Content-disposition', `attachment; filename=${file}`);
-    res.setHeader('Content-type', 'application/octet-stream');
-    const fileStream = fs.createReadStream(filePath);
-    fileStream.pipe(res);
-  } else {
-    res.status(404).send('File not found');
-  }
 });
 
 app.post('/upload', upload.single('file'), (req, res) => {
